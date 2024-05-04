@@ -3,6 +3,8 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import Login from "./App/Screens/LoginScreen/Login";
 import * as SecureStore from "expo-secure-store";
+import TabNavigation from "./App/Navigations/TabNavigation";
+import { NavigationContainer } from "@react-navigation/native";
 
 const tokenCache = {
   async getToken(key) {
@@ -30,7 +32,9 @@ export default function App() {
       <View style={styles.container}>
         {/* Componentes si esta logeado */}
         <SignedIn>
-          <Text>You are Signed in</Text>
+          <NavigationContainer>
+            <TabNavigation />
+          </NavigationContainer>
         </SignedIn>
         {/* Componentes si no esta logeado */}
         <SignedOut>
