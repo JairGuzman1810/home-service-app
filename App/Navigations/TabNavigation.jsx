@@ -21,8 +21,15 @@ export default function TabNavigation() {
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+          tabBarLabel: ({ color, focused }) => (
+            <Text
+              style={{
+                color: color,
+                fontSize: focused ? 14 : 12,
+                marginTop: -7,
+                fontFamily: focused ? "Montserrat-Bold" : "Montserrat-Regular",
+              }}
+            >
               Home
             </Text>
           ),
@@ -35,8 +42,15 @@ export default function TabNavigation() {
         name="Booking"
         component={Booking}
         options={{
-          tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+          tabBarLabel: ({ color, focused }) => (
+            <Text
+              style={{
+                color: color,
+                fontSize: focused ? 14 : 12,
+                marginTop: -7,
+                fontFamily: focused ? "Montserrat-Bold" : "Montserrat-Regular",
+              }}
+            >
               Booking
             </Text>
           ),
@@ -49,8 +63,15 @@ export default function TabNavigation() {
         name="Profile"
         component={Profile}
         options={{
-          tabBarLabel: ({ color }) => (
-            <Text style={{ color: color, fontSize: 12, marginTop: -7 }}>
+          tabBarLabel: ({ color, focused }) => (
+            <Text
+              style={{
+                color: color,
+                fontSize: focused ? 14 : 12,
+                marginTop: -7,
+                fontFamily: focused ? "Montserrat-Bold" : "Montserrat-Regular",
+              }}
+            >
               Profile
             </Text>
           ),

@@ -22,8 +22,21 @@ export default function Header() {
           <View style={styles.profileContainer}>
             <Image source={{ uri: user?.imageUrl }} style={styles.userImage} />
             <View>
-              <Text style={{ color: Colors.WHITE }}>Welcome</Text>
-              <Text style={{ color: Colors.WHITE, fontSize: 20 }}>
+              <Text
+                style={{
+                  color: Colors.WHITE,
+                  fontFamily: "Montserrat-Regular",
+                }}
+              >
+                Welcome
+              </Text>
+              <Text
+                style={{
+                  color: Colors.WHITE,
+                  fontSize: 20,
+                  fontFamily: "Montserrat-Medium",
+                }}
+              >
                 {user?.fullName}
               </Text>
             </View>
@@ -80,6 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     width: "85%",
     fontSize: 16,
+    fontFamily: "Montserrat-Regular",
   },
   searchbtn: {
     backgroundColor: Colors.WHITE,
