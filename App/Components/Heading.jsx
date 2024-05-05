@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 18,
     fontFamily: "Montserrat-Bold",
-    marginBottom: 20,
+    marginBottom: 12,
   },
   viewAll: {
     fontFamily: "Montserrat-Medium",
