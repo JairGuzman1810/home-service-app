@@ -7,7 +7,9 @@ export default function Home() {
   return (
     <View>
       <Header />
-      <Sliders />
+      <View style={{ padding: 20 }}>
+        <Sliders />
+      </View>
     </View>
   );
 }
