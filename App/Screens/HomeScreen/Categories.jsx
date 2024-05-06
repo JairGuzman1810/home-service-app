@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import GlobalAPI from "../../Utils/GlobalAPI";
 import Heading from "../../Components/Heading";
 import Colors from "../../Utils/Colors";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
@@ -37,15 +38,17 @@ export default function Categories() {
             numColumns={4}
             renderItem={({ item, index }) =>
               index <= 3 && ( //Solo va mostrar los 4 primero
-                <View style={styles.container}>
-                  <View style={styles.iconContainer}>
-                    <Image
-                      source={{ uri: item?.icon?.url }}
-                      style={styles.iconImage}
-                    />
+                <TouchableOpacity style={styles.touchable}>
+                  <View style={styles.container}>
+                    <View style={styles.iconContainer}>
+                      <Image
+                        source={{ uri: item?.icon?.url }}
+                        style={styles.iconImage}
+                      />
+                    </View>
+                    <Text style={styles.iconName}>{item?.name}</Text>
                   </View>
-                  <Text style={styles.iconName}>{item?.name}</Text>
-                </View>
+                </TouchableOpacity>
               )
             }
           />
@@ -56,6 +59,10 @@ export default function Categories() {
 }
 
 const styles = StyleSheet.create({
+  touchable: {
+    flex: 1,
+    flexDirection: "row",
+  },
   container: {
     flex: 1,
     alignItems: "center",

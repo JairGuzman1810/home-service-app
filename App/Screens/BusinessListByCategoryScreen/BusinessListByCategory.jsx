@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function BusinessListByCategoryScreen() {
+export default function BusinessListByCategory() {
   return (
     <View>
-      <Text>BusinessListByCategoryScreen</Text>
+      <Text>BusinessListByCategory</Text>
     </View>
   );
 }
