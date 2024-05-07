@@ -2,10 +2,18 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Colors from "../../Utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessListByCategoryItem({ business }) {
+  const navigation = useNavigation();
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.push("Business-Details", { business: business })
+      }
+    >
       <Image style={styles.image} source={{ uri: business?.images[0]?.url }} />
       <View style={{ display: "flex", gap: 10, flex: 1 }}>
         <Text style={styles.contactPerson}>{business.contactPerson}</Text>
@@ -20,7 +28,7 @@ export default function BusinessListByCategoryItem({ business }) {
           {" " + business.address}
         </Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
