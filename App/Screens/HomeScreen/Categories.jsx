@@ -6,10 +6,10 @@ import {
   StyleSheet,
   ActivityIndicator,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import Heading from "../../Components/Heading";
 import Colors from "../../Utils/Colors";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import GlobalAPI from "../../Utils/GlobalAPI";
 

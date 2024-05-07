@@ -6,7 +6,10 @@ export default function BusinessPhotos({ images }) {
   return (
     <View style={styles.container}>
       <Heading text="Photos" />
-      <ScrollView contentContainerStyle={styles.scrollView}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollView}
+      >
         <View style={styles.imageGrid}>
           {images.map((item, index) => (
             <Image

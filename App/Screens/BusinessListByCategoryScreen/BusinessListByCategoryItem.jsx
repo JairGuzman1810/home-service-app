@@ -1,8 +1,7 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React from "react";
 import Colors from "../../Utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessListByCategoryItem({ business }) {

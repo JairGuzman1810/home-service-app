@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Text,
-  ActivityIndicator,
-} from "react-native";
+import { View, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import Heading from "../../Components/Heading";
 import GlobalAPI from "../../Utils/GlobalAPI";
 import Colors from "../../Utils/Colors";
