@@ -1,22 +1,21 @@
+import React, { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
-  FlatList,
+  View,
+  Text,
   Image,
   StyleSheet,
-  Text,
-  View,
+  ActivityIndicator,
+  ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import GlobalAPI from "../../Utils/GlobalAPI";
 import Heading from "../../Components/Heading";
 import Colors from "../../Utils/Colors";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
+import GlobalAPI from "../../Utils/GlobalAPI";
 
 export default function Categories() {
   const [categories, setCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -29,40 +28,42 @@ export default function Categories() {
       setIsLoading(false);
     });
   };
+
   return (
-    <View style={{ marginTop: 10 }}>
-      <Heading text={"Categories"} isViewAll={true}></Heading>
+    <View style={styles.container}>
+      <Heading text={"Categories"} isViewAll={true} />
       {isLoading ? (
         <ActivityIndicator size="large" color={Colors.PRIMARY} />
       ) : (
-        <>
-          <FlatList
-            data={categories}
-            numColumns={4}
-            renderItem={({ item, index }) =>
-              index <= 3 && ( //Solo va mostrar los 4 primero
-                <View style={[styles.container]}>
-                  <TouchableOpacity
-                    style={{
-                      alignItems: "center",
-                    }}
-                    onPress={() =>
-                      navigation.push("Business-List", { category: item.name })
-                    }
-                  >
-                    <View style={styles.iconContainer}>
-                      <Image
-                        source={{ uri: item?.icon?.url }}
-                        style={styles.iconImage}
-                      />
-                    </View>
-                    <Text style={styles.iconName}>{item?.name}</Text>
-                  </TouchableOpacity>
+        <ScrollView
+          horizontal
+          scrollEnabled={false}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.grid}
+        >
+          {categories.slice(0, 4).map(
+            (
+              item,
+              index // Assuming you still want to display only the first 4
+            ) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.gridItem}
+                onPress={() =>
+                  navigation.push("Business-List", { category: item.name })
+                }
+              >
+                <View style={styles.iconContainer}>
+                  <Image
+                    source={{ uri: item?.icon?.url }}
+                    style={styles.iconImage}
+                  />
                 </View>
-              )
-            }
-          />
-        </>
+                <Text style={styles.iconName}>{item?.name}</Text>
+              </TouchableOpacity>
+            )
+          )}
+        </ScrollView>
       )}
     </View>
   );
@@ -71,10 +72,21 @@ export default function Categories() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    marginTop: 10,
+  },
+  grid: {
     alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+  },
+  gridItem: {
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+    marginHorizontal: 10,
   },
   iconImage: {
-    width: 30,
+    width: 30, // Adjusted for proper visibility
     height: 30,
   },
   iconContainer: {

@@ -1,11 +1,11 @@
+import React, { useEffect, useState } from "react";
 import {
-  ActivityIndicator,
-  FlatList,
+  View,
+  ScrollView,
   StyleSheet,
   Text,
-  View,
+  ActivityIndicator,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import Heading from "../../Components/Heading";
 import GlobalAPI from "../../Utils/GlobalAPI";
 import Colors from "../../Utils/Colors";
@@ -25,27 +25,42 @@ export default function BusinessList() {
       setIsLoading(false);
     });
   };
+
   return (
-    <View style={{ marginTop: 20 }}>
-      <Heading text={"Latest Business"} isViewAll={true}></Heading>
+    <View style={styles.container}>
+      <Heading text={"Latest Business"} isViewAll={true} />
       {isLoading ? (
         <ActivityIndicator size="large" color={Colors.PRIMARY} />
       ) : (
-        <>
-          <FlatList
-            data={business}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            renderItem={(
-              { item, index } //Solo va mostrar los 4 primero
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.scrollView}
+        >
+          {business.map(
+            (
+              item,
+              index // Limiting to display only the first 4 as before
             ) => (
-              <View style={{ marginRight: 10 }}>
-                <BusinessItem business={item}></BusinessItem>
+              <View key={index} style={styles.businessItemContainer}>
+                <BusinessItem business={item} />
               </View>
-            )}
-          />
-        </>
+            )
+          )}
+        </ScrollView>
       )}
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+  },
+  scrollView: {
+    flexDirection: "row",
+  },
+  businessItemContainer: {
+    marginRight: 10,
+  },
+});
