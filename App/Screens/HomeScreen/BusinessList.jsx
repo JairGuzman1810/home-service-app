@@ -49,5 +49,3 @@ export default function BusinessList() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

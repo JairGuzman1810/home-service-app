@@ -61,6 +61,14 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.PRIMARY,
     borderBottomLeftRadius: 25,
     borderBottomRightRadius: 25,
+    // Sombra para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    // Sombra para Android
+    elevation: 5,
   },
   profileMainContainer: {
     display: "flex",

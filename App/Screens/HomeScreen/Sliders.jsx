@@ -36,7 +36,7 @@ export default function Sliders() {
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item, index }) => (
-              <View style={{ marginRight: 15 }}>
+              <View style={styles.slider}>
                 <Image
                   source={{ uri: item?.image?.url }}
                   style={styles.sliderImage}
@@ -51,6 +51,10 @@ export default function Sliders() {
 }
 
 const styles = StyleSheet.create({
+  slider: {
+    marginRight: 15,
+    borderRadius: 20,
+  },
   heading: {
     fontSize: 18,
     fontFamily: "Montserrat-Medium",
@@ -59,7 +63,7 @@ const styles = StyleSheet.create({
   sliderImage: {
     width: 270,
     height: 150,
-    borderRadius: 20,
     objectFit: "cover",
+    borderRadius: 20,
   },
 });
