@@ -1,8 +1,14 @@
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
-import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import GlobalAPI from "../../Utils/GlobalAPI";
 import BusinessListByCategoryItem from "./BusinessListByCategoryItem";
 import Colors from "../../Utils/Colors";
@@ -28,7 +34,7 @@ export default function BusinessListByCategory() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
+      <TouchableOpacity style={styles.back} onPress={() => hideModal()}>
         <Ionicons name="arrow-back" size={30} color="black" />
         <Text style={styles.categoryTitle}>{param.category}</Text>
       </TouchableOpacity>
@@ -61,11 +67,6 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 30,
   },
-  loadingContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   back: {
     flexDirection: "row",
     alignItems: "center",
@@ -75,6 +76,11 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontFamily: "Montserrat-Medium",
     marginLeft: 10,
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   emptyContainer: {
     flex: 1, // Usa todo el espacio disponible para centrar el mensaje en la pantalla
