@@ -34,7 +34,7 @@ export default function BusinessListByCategory() {
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.back} onPress={() => hideModal()}>
+      <TouchableOpacity style={styles.back} onPress={() => navigation.goBack()}>
         <Ionicons name="arrow-back" size={30} color="black" />
         <Text style={styles.categoryTitle}>{param.category}</Text>
       </TouchableOpacity>
