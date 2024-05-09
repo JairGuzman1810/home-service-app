@@ -42,19 +42,16 @@ export default function BookingModal({ hideModal }) {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 95 : 70}
       style={styles.container}
     >
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View>
           <TouchableOpacity style={styles.back} onPress={() => hideModal()}>
             <Ionicons name="arrow-back" size={30} color="black" />
             <Text style={styles.categoryTitle}>Booking</Text>
           </TouchableOpacity>
           <Heading text={"Select Date"} />
+          {/* Calendario */}
           <View style={styles.calendar}>
             <CalendarPicker
               onDateChange={setSelectedDate}
@@ -67,6 +64,7 @@ export default function BookingModal({ hideModal }) {
               textStyle={{ fontFamily: "Montserrat-Medium" }}
             />
           </View>
+          {/* Hora */}
           <View style={{ marginTop: 20 }}>
             <Heading text={"Select Time Slot"} />
 
@@ -92,6 +90,7 @@ export default function BookingModal({ hideModal }) {
               )}
             />
           </View>
+          {/* Notas */}
           <View style={{ paddingTop: 15 }}>
             <Heading text={"Any Suggestion Note"} />
             <TextInput
@@ -102,6 +101,10 @@ export default function BookingModal({ hideModal }) {
               style={styles.noteText}
             />
           </View>
+          {/* Boton */}
+          <TouchableOpacity style={{ marginTop: 15 }}>
+            <Text style={styles.confirmbtn}>Confirm & Book</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -155,5 +158,22 @@ const styles = StyleSheet.create({
     padding: 20,
     fontFamily: "Montserrat-Regular",
     borderColor: Colors.PRIMARY,
+  },
+  confirmbtn: {
+    textAlign: "center",
+    fontFamily: "Montserrat-Medium",
+    fontSize: 17,
+    backgroundColor: Colors.PRIMARY,
+    color: Colors.WHITE,
+    padding: 13,
+    borderRadius: 99,
+    // Sombra para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    // Sombra para Android
+    elevation: 4,
+    marginBottom: 5,
   },
 });
