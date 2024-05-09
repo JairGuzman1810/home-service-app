@@ -46,21 +46,20 @@ export default function Categories() {
               item,
               index // Assuming you still want to display only the first 4
             ) => (
-              <TouchableOpacity
-                key={index}
-                style={styles.gridItem}
-                onPress={() =>
-                  navigation.push("Business-List", { category: item.name })
-                }
-              >
-                <View style={styles.iconContainer}>
+              <View key={index} style={styles.gridItem}>
+                <TouchableOpacity
+                  style={styles.iconContainer}
+                  onPress={() =>
+                    navigation.push("Business-List", { category: item.name })
+                  }
+                >
                   <Image
                     source={{ uri: item?.icon?.url }}
                     style={styles.iconImage}
                   />
-                </View>
+                </TouchableOpacity>
                 <Text style={styles.iconName}>{item?.name}</Text>
-              </TouchableOpacity>
+              </View>
             )
           )}
         </ScrollView>
@@ -93,6 +92,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.LIGHT_GRAY,
     padding: 17,
     borderRadius: 99,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    // Sombra para Android
+    elevation: 2,
   },
   iconName: {
     fontFamily: "Montserrat-Regular",

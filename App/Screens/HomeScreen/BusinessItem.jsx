@@ -1,8 +1,10 @@
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import Colors from "../../Utils/Colors";
+import { useNavigation } from "@react-navigation/native";
 
 export default function BusinessItem({ business }) {
+  const navigation = useNavigation();
   // Función para truncar el texto
   const truncateText = (text, maxLength) => {
     if (text && text.length > maxLength) {
@@ -11,14 +13,19 @@ export default function BusinessItem({ business }) {
     return text;
   };
   return (
-    <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() =>
+        navigation.push("Business-Details", { business: business })
+      }
+    >
       <Image source={{ uri: business?.images[0]?.url }} style={styles.image} />
       <View style={styles.infocontainer}>
         <Text style={styles.name}>{truncateText(business?.name, 14)}</Text>
         <Text style={styles.contactPerson}>{business?.contactPerson}</Text>
         <Text style={styles.category}>{business?.category.name}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -27,6 +34,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Colors.WHITE,
     borderRadius: 10,
+    // Sombra para iOS
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    // Sombra para Android
+    elevation: 2,
+    marginBottom: 3,
   },
   image: {
     width: 160,

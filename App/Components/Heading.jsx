@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import Colors from "../Utils/Colors";
 
 export default function Heading({ text, isViewAll = false }) {
   return (
@@ -22,6 +23,8 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   viewAll: {
-    fontFamily: "Montserrat-Medium",
+    fontFamily: "Montserrat-Bold",
+    color: Colors.PRIMARY,
+    fontSize: 13,
   },
 });
