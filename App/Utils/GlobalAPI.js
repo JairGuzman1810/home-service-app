@@ -122,6 +122,37 @@ const createBooking = async ({ data }) => {
   return result;
 };
 
+const getBookingList = async (userEmail) => {
+  const query =
+    gql`
+    query getUserBookings {
+      bookings(orderBy: updatedAt_DESC, where: { userEmail: "` +
+    userEmail +
+    `" }) {
+        id
+        notes
+        time
+        userEmail
+        userName
+        bookingStatus
+        business {
+          id
+          name
+          contactPerson
+          address
+          email
+          about
+          images {
+            url
+          }
+        }
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
 export default {
   getSlider,
   getCategory,
