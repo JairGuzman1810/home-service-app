@@ -83,9 +83,49 @@ const getBusinessListByCategory = async ({ category }) => {
   return result;
 };
 
+const createBooking = async ({ data }) => {
+  console.log(data);
+  const query =
+    gql`
+    mutation createBooking {
+      createBooking(
+        data: {
+          userName: "` +
+    data.userName +
+    `"
+          userEmail: "` +
+    data.userEmail +
+    `"
+          date: "` +
+    data.date +
+    `"
+          time: "` +
+    data.time +
+    `"
+          bookingStatus: Booked
+          notes: "` +
+    data.note +
+    `"
+          business: { connect: { id: "` +
+    data.businessId +
+    `" } }
+        }
+      ) {
+        id
+      }
+      publishManyBookings(to: PUBLISHED) {
+      count
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
 export default {
   getSlider,
   getCategory,
   getBusinessList,
   getBusinessListByCategory,
+  createBooking,
 };

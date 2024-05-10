@@ -9,18 +9,22 @@ import {
   ActivityIndicator,
   ScrollView,
   TextInput,
+  ToastAndroid,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import CalendarPicker from "react-native-calendar-picker";
 import Colors from "../../Utils/Colors";
 import Heading from "../../Components/Heading";
+import GlobalAPI from "../../Utils/GlobalAPI";
+import { useUser } from "@clerk/clerk-expo";
 
-export default function BookingModal({ hideModal }) {
+export default function BookingModal({ businessId, hideModal }) {
   const [timeList, setTimeList] = useState([]);
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedDate, setSelectedDate] = useState("");
   const [note, setNote] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { user } = useUser();
 
   const getTime = () => {
     const timeList = [];
@@ -36,6 +40,24 @@ export default function BookingModal({ hideModal }) {
   useEffect(() => {
     getTime();
   }, []);
+
+  const createBooking = () => {
+    setIsLoading(true);
+    const data = {
+      userName: user?.fullName,
+      userEmail: user?.primaryEmailAddress.emailAddress,
+      time: selectedTime,
+      date: selectedDate,
+      note: note,
+      businessId: businessId,
+    };
+    GlobalAPI.createBooking({ data: data }).then((response) => {
+      console.log(response);
+      setIsLoading(false);
+      ToastAndroid.show("Booking Created Successfully", ToastAndroid.LONG);
+      hideModal();
+    });
+  };
 
   return (
     <KeyboardAvoidingView
@@ -91,6 +113,7 @@ export default function BookingModal({ hideModal }) {
           <TextInput
             placeholder="Note"
             multiline
+            numberOfLines={4}
             onChangeText={setNote}
             style={styles.noteText}
           />
@@ -104,7 +127,7 @@ export default function BookingModal({ hideModal }) {
         ) : (
           <TouchableOpacity
             style={{ marginTop: 15 }}
-            onPress={() => setIsLoading(true)}
+            onPress={() => createBooking()}
             disabled={selectedTime === "" || selectedDate === ""}
           >
             <Text
