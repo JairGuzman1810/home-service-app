@@ -28,18 +28,39 @@ export default function BookingModal({ businessId, hideModal }) {
 
   const getTime = () => {
     const timeList = [];
+    const currentDate = new Date();
+    const selectedDateObj = new Date(selectedDate);
+
+    // Check if selectedDate is today
+    const isToday =
+      selectedDateObj.toDateString() === currentDate.toDateString();
+
     for (let hour = 8; hour <= 19; hour++) {
       const period = hour < 12 ? "AM" : "PM";
       const displayHour = hour <= 12 ? hour : hour - 12;
-      timeList.push({ time: `${displayHour}:00 ${period}` });
-      timeList.push({ time: `${displayHour}:30 ${period}` });
+
+      // Only add the full hour if it's not past the current time
+      if (!isToday || hour > currentDate.getHours()) {
+        timeList.push({ time: `${displayHour}:00 ${period}` });
+      }
+
+      // Add times for the half hour unless they are in the past
+      if (
+        !isToday ||
+        hour > currentDate.getHours() ||
+        (hour === currentDate.getHours() && currentDate.getMinutes() < 30)
+      ) {
+        timeList.push({ time: `${displayHour}:30 ${period}` });
+      }
     }
+
+    // Assuming setTimeList is a function that updates your component's state with the available times
     setTimeList(timeList);
   };
 
   useEffect(() => {
     getTime();
-  }, []);
+  }, [selectedDate]);
 
   const createBooking = () => {
     setIsLoading(true);
@@ -84,29 +105,37 @@ export default function BookingModal({ businessId, hideModal }) {
         </View>
         <View style={{ marginTop: 20 }}>
           <Heading text="Select Time Slot" />
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            style={{ flexDirection: "row" }}
-          >
-            {timeList.map((item, index) => (
-              <TouchableOpacity
-                key={index}
-                onPress={() => setSelectedTime(item.time)}
-                style={{ marginRight: 10 }}
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {timeList.length > 0 ? (
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                style={{ flexGrow: 1 }}
               >
-                <Text
-                  style={
-                    selectedTime === item.time
-                      ? styles.selectedTime
-                      : styles.unselectedTime
-                  }
-                >
-                  {item.time}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+                {timeList.map((item, index) => (
+                  <TouchableOpacity
+                    key={index}
+                    onPress={() => setSelectedTime(item.time)}
+                    style={{ marginRight: 10 }}
+                  >
+                    <Text
+                      style={
+                        selectedTime === item.time
+                          ? styles.selectedTime
+                          : styles.unselectedTime
+                      }
+                    >
+                      {item.time}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            ) : (
+              <View style={{ flex: 1 }}>
+                <Text style={styles.noTimeText}>No Available Times</Text>
+              </View>
+            )}
+          </View>
         </View>
         <View style={{ paddingTop: 15 }}>
           <Heading text="Any Suggestion Note" />
@@ -231,4 +260,11 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   indicator: { padding: 15 },
+  noTimeText: {
+    textAlign: "center",
+    fontFamily: "Montserrat-Medium",
+    fontSize: 17,
+    color: Colors.PRIMARY,
+    paddingVertical: 9.1,
+  },
 });
