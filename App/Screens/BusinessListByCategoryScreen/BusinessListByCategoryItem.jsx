@@ -4,8 +4,30 @@ import Colors from "../../Utils/Colors";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-export default function BusinessListByCategoryItem({ business }) {
+export default function BusinessListByCategoryItem({ business, booking }) {
   const navigation = useNavigation();
+
+  const formatDate = (dateString) => {
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
   return (
     <TouchableOpacity
       style={styles.container}
@@ -17,15 +39,33 @@ export default function BusinessListByCategoryItem({ business }) {
       <View style={{ display: "flex", gap: 10, flex: 1 }}>
         <Text style={styles.contactPerson}>{business.contactPerson}</Text>
         <Text style={styles.name}>{business.name}</Text>
-        <Text style={styles.address}>
-          <Ionicons
-            style={{ marginRight: 10 }}
-            name="location-sharp"
-            size={18}
-            color={Colors.PRIMARY}
-          />
-          {" " + business.address}
-        </Text>
+        {!booking && (
+          <Text style={styles.address}>
+            <Ionicons
+              style={{ marginRight: 10 }}
+              name="location-sharp"
+              size={18}
+              color={Colors.PRIMARY}
+            />
+            {" " + business.address}
+          </Text>
+        )}
+        {booking && (
+          <>
+            <Text style={styles.category}>{booking.bookingStatus}</Text>
+            <Text>
+              <Text style={styles.address}>
+                <Ionicons
+                  style={{ marginRight: 10 }}
+                  name="calendar"
+                  size={18}
+                  color={Colors.PRIMARY}
+                />
+                {" " + formatDate(booking.date)} at {booking.time}
+              </Text>
+            </Text>
+          </>
+        )}
       </View>
     </TouchableOpacity>
   );
@@ -69,5 +109,15 @@ const styles = StyleSheet.create({
     fontFamily: "Montserrat-Regular",
     fontSize: 14,
     color: Colors.GRAY,
+  },
+  category: {
+    fontSize: 11,
+    fontFamily: "Montserrat-Medium",
+    padding: 6,
+    color: Colors.PRIMARY,
+    backgroundColor: Colors.PRIMARY_LIGHT,
+    borderRadius: 3,
+    alignSelf: "flex-start",
+    paddingHorizontal: 7,
   },
 });

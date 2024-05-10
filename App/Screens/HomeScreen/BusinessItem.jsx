@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     // Sombra para Android
     elevation: 2,
     marginBottom: 3,
+    flex: 1,
   },
   image: {
     width: 160,

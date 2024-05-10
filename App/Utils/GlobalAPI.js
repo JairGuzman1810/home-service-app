@@ -122,7 +122,7 @@ const createBooking = async ({ data }) => {
   return result;
 };
 
-const getBookingList = async (userEmail) => {
+const getUserBookings = async (userEmail) => {
   const query =
     gql`
     query getUserBookings {
@@ -132,6 +132,7 @@ const getBookingList = async (userEmail) => {
         id
         notes
         time
+        date
         userEmail
         userName
         bookingStatus
@@ -159,4 +160,5 @@ export default {
   getBusinessList,
   getBusinessListByCategory,
   createBooking,
+  getUserBookings,
 };
