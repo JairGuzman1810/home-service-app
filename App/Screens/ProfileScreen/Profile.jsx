@@ -5,13 +5,18 @@ import {
   Image,
   FlatList,
   TouchableOpacity,
+  Linking,
 } from "react-native";
 import React from "react";
-import { useUser } from "@clerk/clerk-expo";
+import { useClerk, useUser } from "@clerk/clerk-expo";
 import Colors from "../../Utils/Colors";
 import { FontAwesome } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Profile() {
+  const navigation = useNavigation();
+  const { signOut } = useClerk();
+
   const { user } = useUser();
   const profileMenu = [
     {
@@ -35,6 +40,26 @@ export default function Profile() {
       icon: "sign-out",
     },
   ];
+
+  doAction = (index) => {
+    switch (index) {
+      case 1:
+        navigation.navigate("HomeNavigation");
+        break;
+      case 2:
+        navigation.navigate("BookingNavigation");
+        break;
+      case 3:
+        Linking.openURL("mailto:example@corporate.com");
+        break;
+      case 4:
+        signOut();
+        break;
+      default:
+        console.log("Invalid action");
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.profileContainer}>
@@ -60,6 +85,7 @@ export default function Profile() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
             <TouchableOpacity
+              onPress={() => doAction(item.id)}
               style={{
                 display: "flex",
                 flexDirection: "row",

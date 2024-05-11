@@ -17,7 +17,6 @@ export default function HomeNavigation() {
       }}
     >
       <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Booking" component={Booking} />
       <Stack.Screen name="Business-List" component={BusinessListByCategory} />
       <Stack.Screen name="Business-Details" component={BusinessDetails} />
     </Stack.Navigator>

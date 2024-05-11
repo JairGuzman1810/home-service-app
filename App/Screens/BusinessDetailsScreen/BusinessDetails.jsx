@@ -15,13 +15,13 @@ import BusinessPhotos from "./BusinessPhotos";
 import BusinessAboutMe from "./BusinessAboutMe";
 import BusinessName from "./BusinessInformation";
 import BookingModal from "./BookingModal";
+import * as Linking from "expo-linking";
 
 export default function BusinessDetails() {
   const param = useRoute().params;
   const [business, setBusiness] = useState(param.business);
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
-  console.log(business);
 
   return (
     business && (
@@ -53,7 +53,10 @@ export default function BusinessDetails() {
         </ScrollView>
         {/* Botones */}
         <View style={styles.buttonsContainer}>
-          <TouchableOpacity style={[styles.messageBtn]}>
+          <TouchableOpacity
+            style={[styles.messageBtn]}
+            onPress={() => Linking.openURL("mailto:" + business.email)}
+          >
             <Text style={styles.messageText}>Message</Text>
           </TouchableOpacity>
           <TouchableOpacity

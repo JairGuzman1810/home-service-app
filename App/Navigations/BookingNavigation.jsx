@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Home from "../Screens/HomeScreen/Home";
 import BusinessListByCategory from "../Screens/BusinessListByCategoryScreen/BusinessListByCategory";
 import BusinessDetails from "../Screens/BusinessDetailsScreen/BusinessDetails";
 import Colors from "../Utils/Colors";
