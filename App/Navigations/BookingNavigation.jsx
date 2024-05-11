@@ -8,7 +8,7 @@ import Colors from "../Utils/Colors";
 import Booking from "../Screens/BookingScreen/Booking";
 const Stack = createStackNavigator();
 
-export default function HomeNavigation() {
+export default function BookingNavigation() {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -16,7 +16,6 @@ export default function HomeNavigation() {
         tabBarActiveTintColor: Colors.PRIMARY,
       }}
     >
-      <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Booking" component={Booking} />
       <Stack.Screen name="Business-List" component={BusinessListByCategory} />
       <Stack.Screen name="Business-Details" component={BusinessDetails} />

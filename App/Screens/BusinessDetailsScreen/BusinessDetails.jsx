@@ -21,6 +21,7 @@ export default function BusinessDetails() {
   const [business, setBusiness] = useState(param.business);
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
+  console.log(business);
 
   return (
     business && (

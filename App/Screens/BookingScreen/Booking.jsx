@@ -43,6 +43,7 @@ export default function Booking() {
       ) : bookings.length > 0 ? (
         <>
           <FlatList
+            showsVerticalScrollIndicator={false}
             data={bookings}
             onRefresh={() => getUserBookings()}
             refreshing={refreshing}

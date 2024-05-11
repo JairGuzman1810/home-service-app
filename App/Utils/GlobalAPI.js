@@ -146,6 +146,9 @@ const getUserBookings = async (userEmail) => {
           images {
             url
           }
+          category {
+            name
+          }
         }
       }
     }
