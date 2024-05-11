@@ -20,10 +20,6 @@ La interfaz de usuario de esta aplicación ha sido diseñada para proporcionar u
 
 HyGraph proporciona funcionalidades avanzadas que mejoran el rendimiento y la eficiencia de la aplicación, lo que garantiza una experiencia de usuario fluida y sin problemas.
 
-## Mejores prácticas, consejos y trucos para optimizar proyectos React Native
-
-Se incluyen recomendaciones y técnicas para optimizar el rendimiento, la legibilidad del código y la escalabilidad del proyecto React Native. Esto incluye el uso efectivo de bibliotecas como Clerk para gestionar la autenticación y la autorización, y React Navigation para la navegación dentro de la aplicación.
-
 ### Autenticación con Clerk
 
 La autenticación de usuarios en esta aplicación se gestiona utilizando Clerk, que ofrece una solución segura y fácil de usar para la autenticación y la gestión de usuarios. Clerk Expo proporciona una integración perfecta con Expo para una configuración rápida y sin problemas.
@@ -78,5 +74,3 @@ Este proyecto aprovecha estas tecnologías y dependencias para ofrecer una aplic
 ---
 
 ¡Gracias por tu interés en este proyecto! Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto. ¡Espero que encuentres este repositorio útil y valioso para tus proyectos de desarrollo móvil!
-
-
