@@ -52,7 +52,28 @@ export default function BusinessListByCategoryItem({ business, booking }) {
         )}
         {booking && (
           <>
-            <Text style={styles.category}>{booking.bookingStatus}</Text>
+            <Text
+              style={[
+                styles.status,
+                booking.bookingStatus === "Completed"
+                  ? { backgroundColor: Colors.GREEN_LIGHT, color: Colors.GREEN }
+                  : null,
+                booking.bookingStatus === "Booked"
+                  ? {
+                      backgroundColor: Colors.PRIMARY_LIGHT,
+                      color: Colors.PRIMARY,
+                    }
+                  : null,
+                booking.bookingStatus === "Canceled"
+                  ? {
+                      backgroundColor: Colors.RED_LIGHT,
+                      color: Colors.RED,
+                    }
+                  : null,
+              ]}
+            >
+              {booking.bookingStatus}
+            </Text>
             <Text>
               <Text style={styles.address}>
                 <Ionicons
@@ -110,12 +131,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.GRAY,
   },
-  category: {
+  status: {
     fontSize: 11,
     fontFamily: "Montserrat-Medium",
     padding: 6,
-    color: Colors.PRIMARY,
-    backgroundColor: Colors.PRIMARY_LIGHT,
     borderRadius: 3,
     alignSelf: "flex-start",
     paddingHorizontal: 7,

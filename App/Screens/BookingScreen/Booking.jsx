@@ -15,6 +15,7 @@ import BusinessItem from "../HomeScreen/BusinessItem";
 export default function Booking() {
   const [bookings, setBookings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const { user } = useUser();
 
   useEffect(() => {
@@ -22,10 +23,12 @@ export default function Booking() {
   }, [user]);
 
   const getUserBookings = () => {
+    setRefreshing(true);
     GlobalAPI.getUserBookings(user?.primaryEmailAddress.emailAddress).then(
       (response) => {
         setBookings(response?.bookings);
         setIsLoading(false);
+        setRefreshing(false);
         console.lo;
       }
     );
@@ -41,6 +44,8 @@ export default function Booking() {
         <>
           <FlatList
             data={bookings}
+            onRefresh={() => getUserBookings()}
+            refreshing={refreshing}
             renderItem={({ item }) => (
               <BusinessListByCategoryItem
                 business={item?.business}
